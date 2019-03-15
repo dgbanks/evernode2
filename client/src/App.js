@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import "antd/dist/antd.less";
 import logo from './logo.svg';
 import './App.css';
 
