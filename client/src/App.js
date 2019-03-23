@@ -12,7 +12,7 @@ class App extends React.Component {
       <Provider store={Store}>
         <BrowserRouter>
           <Route exact path="/" render={() => (
-              localStorage.getItem("token") ? <Home /> : <Redirect to="/login" />
+              localStorage.getItem("evernodeToken") ? <Home /> : <Redirect to="/login" />
           )} />
           <Route path="/login" component={Login} />
         </BrowserRouter>

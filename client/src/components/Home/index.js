@@ -1,13 +1,22 @@
 import React from "react";
 import { Button } from "antd";
 import styled from "styled-components";
+import { User } from "utils/api";
 
 class Home extends React.Component {
   render() {
     return (
       <Grid>
         <Cell>
-          <Button type="primary">Logout</Button>
+          <Button
+            type="primary"
+            onClick={() => {
+              const id = JSON.parse(atob(localStorage.getItem("evernodeToken").split(".")[1])).user_id;
+              User.fetch(id).then(res => {
+                debugger
+              })
+            }}
+          >Logout</Button>
         </Cell>
       </Grid>
     );
