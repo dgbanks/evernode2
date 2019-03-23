@@ -4,5 +4,9 @@ class ApplicationController < ActionController::API
 
   def current_user
     debugger
+    if request.headers["Authorization"].present?
+      decoded = JSONWebToken.decode(request.headers["Authorization"])
+      debugger
+    end
   end
 end

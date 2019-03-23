@@ -1,11 +1,14 @@
 import React from "react";
 import GoogleLogin from "react-google-login";
 import styled from "styled-components";
-import { Auth } from "utils/api";
+import { User } from "utils/api";
 
 class Login extends React.Component {
   onSuccess = ({ code }) => {
-    Auth.login({ code }).then(({ data }) => {
+    User.login({ code }).then(({ data }) => {
+      User.fetch(JSON.parse(atob(data.auth_token.split(".")[1])).user_id).then(res => {
+        debugger
+      })
       localStorage.setItem("evernodeToken", data.auth_token)
     });
   }
