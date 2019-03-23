@@ -4,8 +4,8 @@ module Api
 
       private
 
-      def render_ok
-
+      def render_ok(response = {})
+        render json: response, status: 200
       end
 
       def render_created
