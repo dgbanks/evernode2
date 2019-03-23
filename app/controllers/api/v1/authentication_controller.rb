@@ -3,7 +3,7 @@ module Api
     class AuthenticationController < ApiController
       def login
         begin
-          response = RestClient.post(
+          @response = RestClient.post(
             "https://www.googleapis.com/oauth2/v4/token",
             {
               code: params[:code],
@@ -18,21 +18,24 @@ module Api
         rescue => error
           debugger
         else
-          id_token = JSON.parse(response)["id_token"]
-          decoded_token = JWT.decode(id_token, nil, false)[0]
-          # google token expires in one hour
-          user = User.find_or_create_by(
-            email: decoded_token["email"],
-            first_name: decoded_token["given_name"],
-            last_name: decoded_token["family_name"]
-          )
-
-          render_ok({})
+          auth_token = JSONWebToken.encode({ user_id: user.id })
+          render_ok({ auth_token: auth_token })
         end
       end
 
       private
 
+      def decoded_token
+        JWT.decode(JSON.parse(@response)["id_token"], nil, false)[0]
+      end
+
+      def user
+        User.find_or_create_by(
+          email: decoded_token["email"],
+          first_name: decoded_token["given_name"],
+          last_name: decoded_token["family_name"]
+        )
+      end
     end
   end
 end
