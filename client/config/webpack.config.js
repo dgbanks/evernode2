@@ -265,8 +265,10 @@ module.exports = function(webpackEnv) {
       alias: {
         actions: path.join(path.join(__dirname, "..", "src"), "actions"),
         components: path.join(path.join(__dirname, "..", "src"), "components"),
+        constants: path.join(path.join(__dirname, "..", "src"), "constants"),
         reducers: path.join(path.join(__dirname, "..", "src"), "reducers"),
         store: path.join(path.join(__dirname, "..", "src"), "store"),
+        utils: path.join(path.join(__dirname, "..", "src"), "utils"),
 
         // Support React Native Web
         // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/

@@ -1,24 +1,13 @@
 import React from "react";
 import GoogleLogin from "react-google-login";
 import styled from "styled-components";
-import axios from "axios";
+import { Auth } from "utils/api";
 
 class Login extends React.Component {
   onSuccess = ({ code }) => {
-    // fetch(`${process.env.REACT_APP_API_BASE_URL}/login`, {
-    //   method: "POST",
-    //   body: JSON.stringify({ code }),
-    //   headers: { "Content-Type": "application/json" }
-    // }).then(res => {
-    //   debugger
-    // });
-    axios.post(
-      `${process.env.REACT_APP_API_BASE_URL}/login`,
-      { code },
-      { headers: { "Content-Type": "application/json" } }
-    ).then(res => {
-      debugger
-    })
+    Auth.login({ code }).then(({ data }) => {
+      localStorage.setItem("evernodeToken", data.auth_token)
+    });
   }
 
   render() {
