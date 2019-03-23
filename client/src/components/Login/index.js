@@ -8,11 +8,12 @@ class Login extends React.Component {
       method: "POST",
       body: JSON.stringify({ code }),
       headers: { "Content-Type": "application/json" }
+    }).then(res => {
+      debugger
     });
   }
 
   render() {
-    console.log(this.props);
     return (
       <Grid>
         <Cell>
