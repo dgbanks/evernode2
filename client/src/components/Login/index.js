@@ -1,16 +1,24 @@
 import React from "react";
 import GoogleLogin from "react-google-login";
 import styled from "styled-components";
+import axios from "axios";
 
 class Login extends React.Component {
   onSuccess = ({ code }) => {
-    fetch(`${process.env.REACT_APP_API_BASE_URL}/login`, {
-      method: "POST",
-      body: JSON.stringify({ code }),
-      headers: { "Content-Type": "application/json" }
-    }).then(res => {
+    // fetch(`${process.env.REACT_APP_API_BASE_URL}/login`, {
+    //   method: "POST",
+    //   body: JSON.stringify({ code }),
+    //   headers: { "Content-Type": "application/json" }
+    // }).then(res => {
+    //   debugger
+    // });
+    axios.post(
+      `${process.env.REACT_APP_API_BASE_URL}/login`,
+      { code },
+      { headers: { "Content-Type": "application/json" } }
+    ).then(res => {
       debugger
-    });
+    })
   }
 
   render() {
