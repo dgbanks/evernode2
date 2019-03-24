@@ -10,12 +10,7 @@ class Home extends React.Component {
         <Cell>
           <Button
             type="primary"
-            onClick={() => {
-              const id = JSON.parse(atob(localStorage.getItem("evernodeToken").split(".")[1])).user_id;
-              User.fetch(id).then(res => {
-                debugger
-              })
-            }}
+            onClick={() => localStorage.removeItem("evernodeToken")}
           >Logout</Button>
         </Cell>
       </Grid>
