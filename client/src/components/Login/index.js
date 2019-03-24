@@ -1,19 +1,23 @@
 import React from "react";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import GoogleLogin from "react-google-login";
 import styled from "styled-components";
 import { User } from "utils/api";
+import { login } from "actions/authentication_actions";
 
 class Login extends React.Component {
-  onSuccess = ({ code }) => {
-    User.login({ code }).then(({ data }) => {
-      User.fetch(JSON.parse(atob(data.auth_token.split(".")[1])).user_id).then(res => {
-        debugger
-      })
-      localStorage.setItem("evernodeToken", data.auth_token)
-    });
-  }
+  // onSuccess = ({ code }) => {
+  //   User.login({ code }).then(({ data }) => {
+  //     User.fetch(JSON.parse(atob(data.auth_token.split(".")[1])).user_id).then(res => {
+  //       debugger
+  //     })
+  //     localStorage.setItem("evernodeToken", data.auth_token)
+  //   });
+  // }
 
   render() {
+    console.log(this.props);
     return (
       <Grid>
         <Cell>
@@ -22,7 +26,7 @@ class Login extends React.Component {
             responseType="code"
             scope="openid email"
             accessType="offline"
-            onSuccess={this.onSuccess}
+            onSuccess={this.props.loginUser}
           />
         </Cell>
       </Grid>
@@ -30,7 +34,13 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+const mapStateToProps = state => ({});
+const mapDispatchToProps = dispatch => ({ loginUser: () => dispatch(login()) });
+
+export default withRouter(connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Login));
 
 const Grid = styled.div`
   height: 100vh;

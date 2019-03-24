@@ -1,6 +1,10 @@
 import { post, get, put, destroy } from "./base";
 
-export const User = {
+export const Authentication = {
   login: params => post("/login", params),
-  fetch: id => get(`/users/${id}`),
+  logout: () => localStorage.removeItem("evernodeToken") // not an API
 };
+
+export const User = {
+  fetch: id => get(`/users/${id}`),
+}
