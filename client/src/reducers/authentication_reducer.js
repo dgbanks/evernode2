@@ -2,7 +2,7 @@ import { authenticationActions } from "constants/action_types";
 
 const state = {
   currentUser: null,
-  fetching: !!localStorage.getItem("evernodeToken"),
+  fetching: !localStorage.getItem("evernodeToken"),
 }
 
 export const AuthenticationReducer = (prevState = state, action) => {
