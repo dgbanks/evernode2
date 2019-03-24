@@ -15,7 +15,7 @@ const logoutUser = () => ({ type: LOGOUT });
 export const login = code => dispatch => {
   dispatch(loginRequest());
   Authentication.login({ code })
-    .then(({ data }) => dispatch(loginSuccess(data)))
+    .then(({ data }) => {debugger; dispatch(loginSuccess(data))})
     .catch(() => dispatch(loginFailure()))
 };
 
