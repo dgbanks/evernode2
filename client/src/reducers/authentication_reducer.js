@@ -1,16 +1,16 @@
 import { authenticationActions } from "constants/action_types";
 
-export const AuthenticationReducer = (prevState = {}, { user, type }) => {
+export default (prevState = {}, action) => {
   Object.freeze(prevState);
-  switch (type) {
+  switch (action.type) {
     case authenticationActions.LOGIN_REQUEST:
-      return Object.assign({}, prevState, { fetching: true });
+      return Object.assign({}, prevState, { authenticating: true });
     case authenticationActions.LOGIN_SUCCESS:
-      return { currentUser: user, authenticated: true, fetching: false};
+      return { isAuthenticated: true, authenticating: false };
     case authenticationActions.LOGIN_FAILURE:
-      return Object.assign({}, prevState, { fetching: false });
+      return Object.assign({}, prevState, { authenticating: false });
     case authenticationActions.LOGOUT:
-      return { currentUser: null, authenticated: false, fetching: false };
+      return { isAuthenticated: false, authenticating: false };
     default:
       return prevState;
   }

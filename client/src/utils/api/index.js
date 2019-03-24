@@ -8,9 +8,7 @@ export const Authentication = {
     }
     return response;
   })},
-  logout: () => {
-    localStorage.removeItem("evernodeToken");
-  }
+  logout: () => localStorage.removeItem("evernodeToken")
 };
 
 export const User = {

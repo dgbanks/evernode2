@@ -9,7 +9,7 @@ import * as serviceWorker from './serviceWorker';
 const token = localStorage.getItem("evernodeToken");
 
 ReactDOM.render(
-  <Provider store={store({ authentication: { authenticated: !!token } })}>
+  <Provider store={store({ authentication: { isAuthenticated: !!token } })}>
     <App />
   </Provider>, document.getElementById('root')
 );

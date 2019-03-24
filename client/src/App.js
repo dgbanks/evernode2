@@ -9,14 +9,14 @@ import Home from "components/Home";
 // class App extends React.Component {
 //   render() {
 //     console.log(this.props);
-const App = ({ authentication: { currentUser, authenticated, fetching } }) => (
+const App = ({ authentication: { isAuthenticated } }) => (
   <BrowserRouter>
     <Switch>
       <Route
         exact
         path="/login"
         render={props => {
-          if (!authenticated) {
+          if (!isAuthenticated) {
             return <Login {...props} />
           } else {
             return <Redirect to="/" />
@@ -28,7 +28,7 @@ const App = ({ authentication: { currentUser, authenticated, fetching } }) => (
         exact
         path="/"
         render={props => {
-          if (authenticated) {
+          if (isAuthenticated) {
             return <Home {...props} />
           } else {
             return <Redirect to="/login" />

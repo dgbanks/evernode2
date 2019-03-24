@@ -4,3 +4,9 @@ export const authenticationActions = {
   LOGIN_FAILURE: "LOGIN_FAILURE",
   LOGOUT: "LOGOUT"
 };
+
+export const currentUserActions = {
+  CURRENT_USER_REQUEST: "CURRENT_USER_REQUEST",
+  CURRENT_USER_SUCCESS: "CURRENT_USER_SUCCESS",
+  CURRENT_USER_FAILURE: "CURRENT_USER_FAILURE",
+};
