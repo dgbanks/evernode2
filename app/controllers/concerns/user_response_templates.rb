@@ -1,7 +1,7 @@
-module UserData
+module UserResponseTemplates
   extend ActiveSupport::Concern
 
-  def login(user)
+  def user_data(user)
     {
       email: user.email,
       first_name: user.first_name,

@@ -1,8 +1,16 @@
 import { post, get, put, destroy } from "./base";
 
 export const Authentication = {
-  login: params => post("/login", params),
-  logout: () => localStorage.removeItem("evernodeToken") // not an API
+  login: params => {
+    return post("/login", params).then(response => {
+    if (response.status === 200) {
+      localStorage.setItem("evernodeToken", response.data.auth_token);
+    }
+    return response;
+  })},
+  logout: () => {
+    localStorage.removeItem("evernodeToken");
+  }
 };
 
 export const User = {

@@ -1,21 +1,16 @@
 import { authenticationActions } from "constants/action_types";
 
-const state = {
-  currentUser: null,
-  fetching: !localStorage.getItem("evernodeToken"),
-}
-
-export const AuthenticationReducer = (prevState = state, action) => {
+export const AuthenticationReducer = (prevState = {}, { user, type }) => {
   Object.freeze(prevState);
-  switch (action.type) {
+  switch (type) {
     case authenticationActions.LOGIN_REQUEST:
-      return { currentUser: null, fetching: true };
+      return Object.assign({}, prevState, { fetching: true });
     case authenticationActions.LOGIN_SUCCESS:
-      return { currentUser: action.user, fetching: false };
+      return { currentUser: user, authenticated: true, fetching: false};
     case authenticationActions.LOGIN_FAILURE:
-      return { currentUser: null, fetching: false };
+      return Object.assign({}, prevState, { fetching: false });
     case authenticationActions.LOGOUT:
-      return { currentUser: null, fetching: false };
+      return { currentUser: null, authenticated: false, fetching: false };
     default:
       return prevState;
   }

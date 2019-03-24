@@ -3,21 +3,11 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import GoogleLogin from "react-google-login";
 import styled from "styled-components";
-import { User } from "utils/api";
 import { login } from "actions/authentication_actions";
 
 class Login extends React.Component {
-  // onSuccess = ({ code }) => {
-  //   User.login({ code }).then(({ data }) => {
-  //     User.fetch(JSON.parse(atob(data.auth_token.split(".")[1])).user_id).then(res => {
-  //       debugger
-  //     })
-  //     localStorage.setItem("evernodeToken", data.auth_token)
-  //   });
-  // }
-
   render() {
-    console.log(this.props);
+    console.log("RERENDERING LOGIN", this.props);
     return (
       <Grid>
         <Cell>
@@ -26,7 +16,7 @@ class Login extends React.Component {
             responseType="code"
             scope="openid email"
             accessType="offline"
-            onSuccess={this.props.loginUser}
+            onSuccess={this.props.login}
           />
         </Cell>
       </Grid>
@@ -34,8 +24,13 @@ class Login extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({});
-const mapDispatchToProps = dispatch => ({ loginUser: () => dispatch(login()) });
+const mapStateToProps = state => ({
+  // currentUser: state.authentication.currentUser,
+  authentication: state.authentication
+});
+const mapDispatchToProps = dispatch => ({
+  login: ({ code }) => dispatch(login(code))
+});
 
 export default withRouter(connect(
   mapStateToProps,

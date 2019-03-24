@@ -1,10 +1,9 @@
 module Api
   module V1
     class AuthenticationController < ApiController
-      include UserData
+      include UserResponseTemplates
 
       def login
-        debugger
         begin
           @response = RestClient.post(
             "https://www.googleapis.com/oauth2/v4/token",
@@ -19,17 +18,17 @@ module Api
             }
           )
         rescue => error
-          debugger
+          render_bad_request
         else
           auth_token = JSONWebToken.encode({ user_id: user.id })
-          render_ok({ user: UserData.login(user), auth_token: auth_token })
+          render_ok({ user: user_data(user), auth_token: auth_token })
         end
       end
 
       private
 
       def decoded_token
-        JWT.decode(JSON.parse(@response)["id_token"], nil, false)[0]
+        @token ||= JWT.decode(JSON.parse(@response)["id_token"], nil, false)[0]
       end
 
       def user

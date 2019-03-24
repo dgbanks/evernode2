@@ -17,7 +17,7 @@ module Api
       end
 
       def render_bad_request
-
+        render status: 400
       end
     end
   end

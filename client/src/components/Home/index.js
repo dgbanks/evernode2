@@ -1,24 +1,36 @@
 import React from "react";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import { Button } from "antd";
 import styled from "styled-components";
-import { User } from "utils/api";
+import { logout } from "actions/authentication_actions";
 
 class Home extends React.Component {
   render() {
+    console.log(this.props);
     return (
       <Grid>
         <Cell>
-          <Button
-            type="primary"
-            onClick={() => localStorage.removeItem("evernodeToken")}
-          >Logout</Button>
+          <Button type="primary" onClick={this.props.logout}>
+            Logout
+          </Button>
         </Cell>
       </Grid>
     );
   }
 }
 
-export default Home;
+const mapStateToProps = state => ({
+  authentication: state.authentication
+});
+const mapDispatchToProps = dispatch => ({
+  logout: () => dispatch(logout())
+});
+
+export default withRouter(connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Home));
 
 const Grid = styled.div`
   height: 100vh;
