@@ -12,8 +12,8 @@ const userRequest = () => ({ type: CURRENT_USER_REQUEST });
 const userSuccess = user => ({ type: CURRENT_USER_SUCCESS, user });
 const userFailure = () => ({ type: CURRENT_USER_FAILURE });
 
-export const fetchUser = () => dispatch => {
-  dispatch(userRequest(decodedTokenPayload.user_id));
+export const fetchCurrentUser = () => dispatch => {
+  dispatch(userRequest());
   User.fetch()
     .then(res => dispatch(userSuccess(res.data.user)))
     .catch(res => dispatch(userFailure()))

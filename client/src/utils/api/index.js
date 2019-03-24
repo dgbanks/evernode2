@@ -12,5 +12,5 @@ export const Authentication = {
 };
 
 export const User = {
-  fetch: id => get(`/users/${id}`),
+  fetch: () => get(`/users/currentUser`),
 }

@@ -7,7 +7,6 @@ import { login } from "actions/authentication_actions";
 
 class Login extends React.Component {
   render() {
-    console.log("RERENDERING LOGIN", this.props);
     return (
       <Grid>
         <Cell>
