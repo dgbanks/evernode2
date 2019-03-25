@@ -4,7 +4,6 @@ module Api
       include UserResponseTemplates
 
       def show
-        # debugger
         render_ok({ user: user_data(current_user) }) if current_user
       end
     end

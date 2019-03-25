@@ -1,8 +1,6 @@
 module Api
   module V1
     class AuthenticationController < ApiController
-      include UserResponseTemplates
-
       def login
         begin
           @response = RestClient.post(
