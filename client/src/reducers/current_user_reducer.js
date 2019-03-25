@@ -12,7 +12,7 @@ export default (prevState = state, { user, type }) => {
     case currentUserActions.CURRENT_USER_FAILURE:
       return prevState;
     case authenticationActions.LOGOUT:
-      return prevState;
+      return { data: null, fetching: false };
     default:
       return prevState;
   }

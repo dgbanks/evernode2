@@ -1,14 +1,12 @@
 import { post, get, put, destroy } from "./base";
+import { setToken, removeToken } from "utils/auth_token";
 
 export const Authentication = {
-  login: params => {
-    return post("/login", params).then(response => {
-    if (response.status === 200) {
-      localStorage.setItem("evernodeToken", response.data.auth_token);
-    }
+  login: params => post("/login", params).then(response => {
+    response.status === 200 && setToken(response.data.auth_token);
     return response;
-  })},
-  logout: () => localStorage.removeItem("evernodeToken")
+  }),
+  logout: () => removeToken()
 };
 
 export const User = {

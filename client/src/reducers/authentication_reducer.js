@@ -1,6 +1,9 @@
 import { authenticationActions } from "constants/action_types";
+import { authToken } from "utils/auth_token";
 
-export default (prevState = {}, action) => {
+const state = { isAuthenticated: !!authToken };
+
+export default (prevState = state, action) => {
   Object.freeze(prevState);
   switch (action.type) {
     case authenticationActions.LOGIN_REQUEST:

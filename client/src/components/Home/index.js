@@ -11,14 +11,10 @@ class Home extends React.Component {
     super(props);
     if (props.isAuthenticated && !props.currentUser.fetching) {
       props.fetchCurrentUser()
-      // .then(res => {
-      //   debugger
-      // })
     }
   }
 
   render() {
-    console.log(this.props);
     return (
       <Grid>
         <Cell>

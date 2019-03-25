@@ -8,14 +8,14 @@ const {
 } = authenticationActions;
 
 const loginRequest = () => ({ type: LOGIN_REQUEST });
-const loginSuccess = user => ({ type: LOGIN_SUCCESS, user });
+const loginSuccess = () => ({ type: LOGIN_SUCCESS });
 const loginFailure = () => ({ type: LOGIN_FAILURE });
 const logoutUser = () => ({ type: LOGOUT });
 
 export const login = code => dispatch => {
   dispatch(loginRequest());
   Authentication.login({ code })
-    .then(res => dispatch(loginSuccess(res.data.user)))
+    .then(res => dispatch(loginSuccess()))
     .catch(res => dispatch(loginFailure()))
 };
 

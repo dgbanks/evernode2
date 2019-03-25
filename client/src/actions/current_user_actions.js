@@ -1,6 +1,5 @@
 import { User } from "utils/api";
 import { currentUserActions } from "constants/action_types";
-import { decodedTokenPayload } from "utils/auth_token";
 
 const {
   CURRENT_USER_REQUEST,

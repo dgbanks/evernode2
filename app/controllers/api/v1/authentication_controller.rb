@@ -21,7 +21,7 @@ module Api
           render_bad_request
         else
           auth_token = JSONWebToken.encode({ user_id: user.id })
-          render_ok({ user: user_data(user), auth_token: auth_token })
+          render_ok({ auth_token: auth_token })
         end
       end
 
@@ -32,7 +32,7 @@ module Api
       end
 
       def user
-        @user ||= User.find_or_create_by(
+        User.find_or_create_by(
           email: decoded_token["email"],
           first_name: decoded_token["given_name"],
           last_name: decoded_token["family_name"]

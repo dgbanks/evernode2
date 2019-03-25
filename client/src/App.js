@@ -2,13 +2,10 @@ import React from 'react';
 import "antd/dist/antd.less";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-// import Store from "store";
 import Login from "components/Login";
 import Home from "components/Home";
+import { authToken } from "utils/auth_token";
 
-// class App extends React.Component {
-//   render() {
-//     console.log(this.props);
 const App = ({ authentication: { isAuthenticated } }) => (
   <BrowserRouter>
     <Switch>
@@ -39,26 +36,6 @@ const App = ({ authentication: { isAuthenticated } }) => (
   </BrowserRouter>
 );
 
-    // return (
-//       <BrowserRouter>
-//         <Switch>
-//           <Route
-//             exact
-//             path="/login"
-//             render={props => {
-//               if (this.props.) {
-//
-//               }
-//             }}
-//           />
-//           <AuthenticatedRoute exact path="/" component={Home} />
-//           <UnauthenticatedRoute exact path="/login" component={Login} />
-//         </Switch>
-//       </BrowserRouter>
-//     );
-//   }
-// }
-
 const mapStateToProps = ({ authentication }) => ({ authentication });
 const mapDispatchToProps = dispatch => ({});
 
@@ -66,31 +43,3 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(App);
-
-const AuthenticatedRoute = ({ component: Component, ...rest }) => (
-  <Route
-    {...rest}
-    render={props => {
-      console.log(props);
-      if (localStorage.getItem("evernodeToken")) {
-        return <Component {...props} />
-      } else {
-        return <Redirect to="/login" />
-      }
-    }}
-  />
-);
-
-const UnauthenticatedRoute = ({ component: Component, ...rest }) => (
-  <Route
-    {...rest}
-    render={props => {
-      console.log(props);
-      if (localStorage.getItem("evernodeToken")) {
-        return <Redirect to="/" />
-      } else {
-        return <Component {...props} />
-      }
-    }}
-  />
-);
