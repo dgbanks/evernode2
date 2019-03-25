@@ -1,7 +1,6 @@
 import { authenticationActions } from "constants/action_types";
-import { authToken } from "utils/auth_token";
 
-const state = { isAuthenticated: !!authToken };
+const state = { isAuthenticated: !!localStorage.getItem("evernodeToken") };
 
 export default (prevState = state, action) => {
   Object.freeze(prevState);
