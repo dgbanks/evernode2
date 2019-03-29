@@ -1,47 +1,56 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-
   describe "Validations" do
-    subject { described_class.new(email: "johndoe@email.com") }
+    let(:john) { build(:john) }
+    let(:jane) { create(:jane) }
 
     it "is valid with valid attribtues" do
-      subject.email = nil
-      expect(subject).to_not be_valid
-    end
-    it "is not valid without first_name" do
-      subject.last_name = "Doe"
-      expect(subject).to_not be_valid
-    end
-    it "is not valid without last_name" do
-      subject.first_name = "John"
-      expect(subject).to_not be_valid
-    end
-    it "is not valid without email" do
-      subject.first_name = "John"
-      subject.last_name = "Doe"
-      subject.email = nil
-      expect(subject).to_not be_valid
-    end
-    it "has a properly formatted email" do
-      subject.first_name = "John"
-      subject.last_name = "Doe"
-      subject.email = "johndoe"
-      expect(subject).to_not be_valid
-      subject.email = "johndoe@email.com"
-      expect(subject).to be_valid
+      expect(john).to be_valid
     end
 
-    it "has enforces email uniqueness" do
-      subject.first_name = "John"
-      subject.last_name = "Doe"
-      subject.save!
-      user = User.create(
-        first_name: "Jane",
-        last_name: "Doe",
-        email:"johndoe@email.com"
-      )
-      expect(user).to_not be_valid
+    it "is not valid without first_name" do
+      john.first_name = nil
+      expect(john).to_not be_valid
+    end
+
+    it "is not valid without last_name" do
+      john.last_name = nil
+      expect(john).to_not be_valid
+    end
+
+    it "is not valid without email" do
+      john.email = nil
+      expect(john).to_not be_valid
+    end
+
+    it "has a properly formatted email" do
+      john.email = "johndoe"
+      expect(john).to_not be_valid
+    end
+
+    it "enforces email uniqueness" do
+      jane; john.save
+      expect(john).to_not be_valid
+    end
+  end
+
+  describe "Associations" do
+    let(:jane) { create(:jane_with_canvases) }
+
+    it "has many canvases" do
+      association = described_class.reflect_on_association(:canvases)
+      expect(association.macro).to eq :has_many
+      expect(jane.canvases.length).to eq(3)
+      expect(jane.canvases.all? { |c| c.is_a?(Canvas) }).to be true
+    end
+  end
+
+  describe "#name" do
+    let(:john) { build(:john) }
+
+    it "returns first and last name separated by a space" do
+      expect(john.name).to eq("John Doe")
     end
   end
 end
