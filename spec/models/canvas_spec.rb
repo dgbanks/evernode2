@@ -20,12 +20,19 @@ RSpec.describe Canvas, type: :model do
   end
 
   describe "Associations" do
-    let(:canvas) { build(:canvas) }
-    
+    let(:canvas) { create(:canvas_with_nodes) }
+
     it "belongs to an owner" do
       association = described_class.reflect_on_association(:owner)
       expect(association.macro).to eq(:belongs_to)
       expect(canvas.owner).to be_a(User)
+    end
+
+    it "has many nodes" do
+      association = described_class.reflect_on_association(:nodes)
+      expect(association.macro).to eq(:has_many)
+      expect(canvas.nodes.length).to eq(10)
+      expect(canvas.nodes.all? { |n| n.is_a?(Node) }).to be true
     end
   end
 end

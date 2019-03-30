@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190329022109) do
+ActiveRecord::Schema.define(version: 20190329164328) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,25 @@ ActiveRecord::Schema.define(version: 20190329022109) do
     t.index ["user_id"], name: "index_canvases_on_user_id"
   end
 
+  create_table "edges", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "source_id", null: false
+    t.uuid "target_id", null: false
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["source_id"], name: "index_edges_on_source_id"
+    t.index ["target_id"], name: "index_edges_on_target_id"
+  end
+
+  create_table "nodes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "canvas_id", null: false
+    t.string "title"
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["canvas_id"], name: "index_nodes_on_canvas_id"
+  end
+
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "email", null: false
     t.string "first_name", null: false
@@ -35,4 +54,7 @@ ActiveRecord::Schema.define(version: 20190329022109) do
   end
 
   add_foreign_key "canvases", "users"
+  add_foreign_key "edges", "nodes", column: "source_id"
+  add_foreign_key "edges", "nodes", column: "target_id"
+  add_foreign_key "nodes", "canvases"
 end

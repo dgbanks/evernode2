@@ -12,12 +12,14 @@ gem 'rack-cors'
 gem 'jwt'
 gem 'rest-client'
 
+group :test do
+  gem 'rspec-rails'
+  gem 'factory_bot_rails'
+end
+
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'dotenv-rails'
-  gem 'rspec-rails'
-  gem 'factory_bot_rails'
-  gem 'database_cleaner'
 end
 
 group :development do

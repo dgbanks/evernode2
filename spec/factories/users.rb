@@ -1,4 +1,4 @@
-require 'rails_helper'
+# require 'rails_helper'
 
 FactoryBot.define do
   factory :john, class: User do
@@ -6,6 +6,7 @@ FactoryBot.define do
     last_name { "Doe" }
     email { "jdoe@email.com" }
   end
+  
   factory :jane, class: User do
     first_name { "Jane" }
     last_name { "Doe" }
