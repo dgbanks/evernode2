@@ -23,18 +23,19 @@ RSpec.describe Edge, type: :model do
   end
 
   describe "Associations" do
-    # let(:edge) { create(:edge) }
-    #
-    # it "belongs to source" do
-    #   association = described_class.reflect_on_association(:source)
-    #   expect(association.macro).to eq(:belongs_to)
-    #   expect(edge.source).to be_a(Node)
-    # end
-    #
-    # it "belongs to target" do
-    #   association = described_class.reflect_on_association(:target)
-    #   expect(association.macro).to eq(:belongs_to)
-    #   expect(edge.target).to be_a(Node)
-    # end
+    let(:nodes) { create(:canvas_with_nodes).nodes }
+    let(:edge) { create(:edge, source_id: nodes.first.id, target_id: nodes.last.id) }
+
+    it "belongs to source" do
+      association = described_class.reflect_on_association(:source)
+      expect(association.macro).to eq(:belongs_to)
+      expect(edge.source).to be_a(Node)
+    end
+
+    it "belongs to target" do
+      association = described_class.reflect_on_association(:target)
+      expect(association.macro).to eq(:belongs_to)
+      expect(edge.target).to be_a(Node)
+    end
   end
 end
