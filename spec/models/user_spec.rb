@@ -1,56 +1,54 @@
-# require 'rails_helper'
-
 RSpec.describe User, type: :model do
   describe "Validations" do
-    let(:john) { build(:john) }
-    let(:jane) { create(:jane) }
+    let(:user) { build(:user, email: "johndoe@email.com") }
 
-    it "is valid with valid attribtues" do
-      expect(john).to be_valid
+    it "is invalid without first_name" do
+      expect(user).to be_valid
+      user.first_name = nil
+      expect(user).to_not be_valid
     end
 
-    it "is not valid without first_name" do
-      john.first_name = nil
-      expect(john).to_not be_valid
+    it "is invalid without last_name" do
+      expect(user).to be_valid
+      user.last_name = nil
+      expect(user).to_not be_valid
     end
 
-    it "is not valid without last_name" do
-      john.last_name = nil
-      expect(john).to_not be_valid
-    end
-
-    it "is not valid without email" do
-      john.email = nil
-      expect(john).to_not be_valid
+    it "is invalid without email" do
+      expect(user).to be_valid
+      user.email = nil
+      expect(user).to_not be_valid
     end
 
     it "has a properly formatted email" do
-      john.email = "johndoe"
-      expect(john).to_not be_valid
+      expect(user).to be_valid
+      user.email = "johndoe"
+      expect(user).to_not be_valid
     end
 
     it "enforces email uniqueness" do
-      jane; john.save
-      expect(john).to_not be_valid
+      create(:user, email:"johndoe@email.com")
+      expect(user).to_not be_valid
     end
   end
 
   describe "Associations" do
-    let(:jane) { create(:jane_with_canvases) }
+    let(:user) { create(:user_with_canvases) }
 
     it "has many canvases" do
       association = described_class.reflect_on_association(:canvases)
       expect(association.macro).to eq :has_many
-      expect(jane.canvases.length).to eq(3)
-      expect(jane.canvases.all? { |c| c.is_a?(Canvas) }).to be true
+      expect(user.canvases.length).to eq(3)
+      expect(user.canvases.all? { |c| c.is_a?(Canvas) }).to be true
     end
   end
 
   describe "#name" do
-    let(:john) { build(:john) }
+    let(:user) { build(:user) }
 
     it "returns first and last name separated by a space" do
-      expect(john.name).to eq("John Doe")
+      expect(user.name).to eq(user.first_name + " " + user.last_name)
+      expect(user.name).to eq("John Doe")
     end
   end
 end
