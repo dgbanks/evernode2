@@ -1,26 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { Layout, Typography, Dropdown, Menu, Spin, Icon } from "antd";
+import { Layout, Spin, Icon } from "antd";
 import styled from "styled-components";
 import { logout } from "actions/authentication_actions";
 import { fetchCurrentUser } from "actions/current_user_actions";
-
-const Header = styled(Layout.Header)`
-  display: flex;
-  justify-content: space-between;
-`;
-
-const Title = styled(Typography.Title)`
-  color: white !important;
-  line-height: unset !important;
-  margin: 0px !important;
-`;
-
-const UserName = styled.span`
-  font-size: 20px;
-  margin-right:5px;
-`;
+import Header from "./Header";
+import Canvases from "./Canvases";
 
 class Home extends React.Component {
   constructor(props) {
@@ -31,8 +17,8 @@ class Home extends React.Component {
   }
 
   render() {
-    const { currentUser } = this.props;
-
+    const { currentUser, logout } = this.props;
+    // debugger
     if (currentUser.fetching || !currentUser.data) {
       return (
         <Layout style={{ height: "100vh", justifyContent: "center" }}>
@@ -43,20 +29,9 @@ class Home extends React.Component {
 
     return (
       <Layout style={{ height: "100vh" }}>
-      <Header>
-        <Title>evernode</Title>
-        <Title>
-          <Dropdown overlay={<Menu>
-            <Menu.Item onClick={this.props.logout}>Logout</Menu.Item>
-          </Menu>}>
-            <a className="ant-dropdown-link" href="#">
-              <UserName>{currentUser.data.first_name}</UserName>
-              <Icon type="down" style={{ fontSize:15 }} />
-            </a>
-          </Dropdown>
-        </Title>
-      </Header>
+      <Header logout={logout} currentUser={currentUser.data} />
       <Layout style={{ height: "calc(100vh - 112px)" }}>
+        <Canvases data={currentUser.data.canvases} />
       </Layout>
       <Layout.Footer>
       </Layout.Footer>
