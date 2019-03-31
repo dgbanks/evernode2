@@ -8,7 +8,6 @@ const Header = styled(Layout.Header)`
 `;
 
 const Title = styled(Typography.Title)`
-  color: white !important;
   line-height: unset !important;
   margin: 0px !important;
 `;
@@ -16,6 +15,12 @@ const Title = styled(Typography.Title)`
 const UserName = styled.span`
   font-size: 20px;
   margin-right:5px;
+  color:white;
+`;
+
+const Arrow = styled(Icon)`
+  font-size: 15px !important;
+  color: white;
 `;
 
 export default ({ logout, currentUser }) => (
@@ -25,9 +30,9 @@ export default ({ logout, currentUser }) => (
       <Dropdown overlay={<Menu>
         <Menu.Item onClick={logout}>Logout</Menu.Item>
       </Menu>}>
-        <a className="ant-dropdown-link" href="#">
+        <a>
           <UserName>{currentUser.first_name}</UserName>
-          <Icon type="down" style={{ fontSize:15 }} />
+          <Arrow type="down"  />
         </a>
       </Dropdown>
     </Title>

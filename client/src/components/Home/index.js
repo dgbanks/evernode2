@@ -18,7 +18,7 @@ class Home extends React.Component {
 
   render() {
     const { currentUser, logout } = this.props;
-    // debugger
+
     if (currentUser.fetching || !currentUser.data) {
       return (
         <Layout style={{ height: "100vh", justifyContent: "center" }}>
