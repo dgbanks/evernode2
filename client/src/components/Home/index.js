@@ -8,6 +8,13 @@ import { fetchCurrentUser } from "actions/current_user_actions";
 import Header from "./Header";
 import Canvases from "./Canvases";
 
+const LargeIcon = styled(Icon)`font-size: 75px`;
+const Body = styled(Layout)`
+  height: calc(100vh - 112px);
+  display: grid;
+  grid-template-columns: 25% 50% 25%;
+`;
+
 class Home extends React.Component {
   constructor(props) {
     super(props);
@@ -22,7 +29,7 @@ class Home extends React.Component {
     if (currentUser.fetching || !currentUser.data) {
       return (
         <Layout style={{ height: "100vh", justifyContent: "center" }}>
-          <Spin indicator={<Icon type="loading" spin style={{ fontSize: 75 }} />} />
+          <Spin indicator={<LargeIcon type="loading" spin />} />
         </Layout>
       )
     }
@@ -30,9 +37,9 @@ class Home extends React.Component {
     return (
       <Layout style={{ height: "100vh" }}>
       <Header logout={logout} currentUser={currentUser.data} />
-      <Layout style={{ height: "calc(100vh - 112px)" }}>
+      <Body>
         <Canvases data={currentUser.data.canvases} />
-      </Layout>
+      </Body>
       <Layout.Footer>
       </Layout.Footer>
       </Layout>

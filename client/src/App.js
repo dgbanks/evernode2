@@ -1,5 +1,6 @@
 import React from 'react';
 import "antd/dist/antd.less";
+import "./App.css";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import Login from "components/Login";
