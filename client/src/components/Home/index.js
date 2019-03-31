@@ -26,7 +26,7 @@ class Home extends React.Component {
   constructor(props) {
     super(props);
     if (props.isAuthenticated && !props.currentUser.fetching) {
-      props.fetchCurrentUser()
+      props.fetchCurrentUser();
     }
   }
 
