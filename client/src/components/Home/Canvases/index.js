@@ -1,5 +1,6 @@
 import React from "react";
 import { List as AntList, Typography, Button, Modal } from "antd";
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
 const List = styled(AntList)`
@@ -25,7 +26,7 @@ export default ({ data }) => (
   renderItem={n => (
     <List.Item key={n}>
       <List.Item.Meta
-        title={<Typography.Text>{`Something ${n}`}</Typography.Text>}
+        title={<NavLink to="/">{`Something ${n}`}</NavLink>}
         description="some more text"
       />
     </List.Item>
