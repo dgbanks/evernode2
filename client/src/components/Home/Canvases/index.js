@@ -26,7 +26,7 @@ export default ({ data }) => (
   renderItem={n => (
     <List.Item key={n}>
       <List.Item.Meta
-        title={<NavLink to="/">{`Something ${n}`}</NavLink>}
+        title={<NavLink to={`/${n}`}>{`Something ${n}`}</NavLink>}
         description="some more text"
       />
     </List.Item>
