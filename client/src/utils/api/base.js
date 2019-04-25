@@ -10,5 +10,14 @@ config.interceptors.request.use(config => {
   return config;
 });
 
+config.interceptors.response.use(response => {
+  if (!response.data) {
+    debugger
+    localStorage.removeItem("evernodeToken");
+  }
+  // refresh token flow still needed!
+  return response
+});
+
 export const destroy = config.delete;
 export const { post, get, put } = config;
