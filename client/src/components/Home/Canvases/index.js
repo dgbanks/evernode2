@@ -1,7 +1,8 @@
 import React from "react";
-import { List as AntList, Typography, Button, Modal } from "antd";
+import { List as AntList, Typography, Button } from "antd";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
+import openCanvasForm from "./CanvasForm"
 
 const List = styled(AntList)`
   background: white;
@@ -14,7 +15,7 @@ const List = styled(AntList)`
 const Header = () => (
   <>
     <Typography.Title level={4}>Your Canvases</Typography.Title>
-    <Button type="primary">New</Button>
+    <Button type="primary" onClick={openCanvasForm}>New</Button>
   </>
 );
 
