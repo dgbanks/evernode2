@@ -466,6 +466,7 @@ module.exports = function(webpackEnv) {
                       'link-color': '#1DA57A',
                       'link-hover-color': '#1DA57A',
                       'heading-color': '#1DA57A',
+                      'label-color': 'unset'
                     },
                     javascriptEnabled: true,
                   },
