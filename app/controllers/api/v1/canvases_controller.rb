@@ -16,12 +16,6 @@ module Api
       def destroy
         debugger
       end
-
-      private
-
-      def canvas_json
-
-      end
     end
   end
 end
