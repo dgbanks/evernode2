@@ -4,9 +4,7 @@ import { Form, Modal, Input } from "antd";
 import { toggleForm } from "actions/ui_actions";
 import { createCanvas } from "actions/canvas_actions";
 
-const CanvasForm = Form.create()(({ form, open, toggle, createCanvas }) => {
-  // debugger
-  return (
+const CanvasForm = Form.create()(({ form, open, toggle, createCanvas }) => (
     <Modal
     title="New Canvas"
     visible={open}
@@ -26,10 +24,11 @@ const CanvasForm = Form.create()(({ form, open, toggle, createCanvas }) => {
       </Form.Item>
     </Modal>
   )
-});
+);
 
 const mapStateToProps = state => ({
-  open: state.ui.formOpen
+  open: state.ui.formOpen,
+  submitting: state.canvases.formSubmit
 });
 
 const mapDispatchToProps = dispatch => ({

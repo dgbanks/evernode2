@@ -40,7 +40,7 @@ export default connect(
       </Menu>}>
         <a>
           <UserName>{currentUser.first_name}</UserName>
-          <Arrow type="down"  />
+          <Arrow type="down" />
         </a>
       </Dropdown>
     </Title>

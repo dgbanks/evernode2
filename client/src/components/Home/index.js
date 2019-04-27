@@ -3,9 +3,6 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { Layout, Spin, Icon } from "antd";
 import styled from "styled-components";
-import { logout } from "actions/authentication_actions";
-// import { toggleForm } from "actions/ui_actions";
-// import { createCanvas } from "actions/canvas_actions";
 import { fetchCurrentUser } from "actions/current_user_actions";
 import Header from "./Header";
 import Canvases from "./Canvases";
@@ -52,13 +49,9 @@ class Home extends React.Component {
 const mapStateToProps = state => ({
   isAuthenticated: state.authentication.isAuthenticated,
   currentUser: state.currentUser,
-  // formOpen: state.ui.formOpen
 });
 const mapDispatchToProps = dispatch => ({
-  // logout: () => dispatch(logout()),
   fetchCurrentUser: () => dispatch(fetchCurrentUser()),
-  // toggleForm: () => dispatch(toggleForm()),
-  // createCanvas: canvas => dispatch(createCanvas(canvas))
 });
 
 export default withRouter(connect(
