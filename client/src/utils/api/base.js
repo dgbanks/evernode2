@@ -11,8 +11,7 @@ config.interceptors.request.use(config => {
 });
 
 config.interceptors.response.use(response => {
-  if (!response.data) {
-    debugger
+  if (response.status === 400) {
     localStorage.removeItem("evernodeToken");
   }
   // refresh token flow still needed!

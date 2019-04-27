@@ -1,5 +1,5 @@
 import { Canvases } from "utils/api";
-import { canvasActions } from "constants/action_types";
+import { canvasActions, uiActions } from "constants/action_types";
 
 const {
   CANVAS_CREATE_REQUEST,
@@ -14,6 +14,9 @@ const createFailure = () => ({ type: CANVAS_CREATE_FAILURE });
 export const createCanvas = canvas => dispatch => {
   dispatch(createRequest());
   Canvases.create(canvas)
-    .then(res => dispatch(createSuccess(res.data.canvas)))
+    .then(res => {
+      dispatch(createSuccess(res.data.canvas));
+      dispatch({ type: uiActions.TOGGLE_FORM });
+    })
     .catch(res => dispatch(createFailure()))
 };

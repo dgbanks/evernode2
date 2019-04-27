@@ -2,7 +2,11 @@ module Api
   module V1
     class CanvasesController < ApiController
       def create
-        debugger
+        canvas = Canvas.create(
+          title: params[:canvas][:title],
+          user_id: current_user.id
+        )
+        render_ok(canvas_json(canvas))
       end
 
       def show

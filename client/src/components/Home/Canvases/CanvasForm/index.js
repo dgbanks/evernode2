@@ -11,9 +11,7 @@ const CanvasForm = Form.create()(({ form, open, toggle, createCanvas }) => (
     destroyOnClose
     onCancel={toggle}
     okButtonProps={{ disabled: !form.getFieldValue("title") }}
-    onOk={() => {
-      console.log(form.getFieldValue("title"));
-    }}
+    onOk={() => createCanvas({ title: form.getFieldValue("title") })}
     >
       <Form.Item label="Title">
         {form.getFieldDecorator('title', {
