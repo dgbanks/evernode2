@@ -37,7 +37,7 @@ class Home extends React.Component {
       <Layout style={{ height: "100vh" }}>
       <Header />
       <Body>
-        <Canvases data={currentUser.data.canvases} />
+        <Canvases />
       </Body>
       <Layout.Footer>
       </Layout.Footer>

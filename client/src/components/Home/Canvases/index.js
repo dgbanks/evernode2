@@ -6,7 +6,7 @@ import styled from "styled-components";
 import { toggleForm } from "actions/ui_actions";
 import CanvasForm from "./CanvasForm"
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({ canvases: state.canvases.data });
 const mapDispatchToProps = dispatch => ({ toggle: () => dispatch(toggleForm()) });
 
 const List = styled(AntList)`
@@ -28,18 +28,20 @@ const Header = ({ toggle }) => (
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(({ toggle }) => (
+)(({ toggle, canvases }) => {
+  // debugger
+  return (
   <List
   header={<Header toggle={toggle} />}
-  dataSource={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
+  dataSource={canvases}
   pagination={{ total: 10, pageSize: 5 }}
-  renderItem={n => (
-    <List.Item key={n}>
+  renderItem={({id, title}) => (
+    <List.Item>
       <List.Item.Meta
-        title={<NavLink to={`/${n}`}>{`Something ${n}`}</NavLink>}
+        title={<NavLink to={`/${id}`}>{title}</NavLink>}
         description="some more text"
       />
     </List.Item>
   )}
   />
-));
+)});
