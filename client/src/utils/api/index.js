@@ -9,6 +9,13 @@ export const Authentication = {
   logout: () => localStorage.removeItem("evernodeToken")
 };
 
+export const Canvases = {
+  create: params => post("/canvases"),
+  fetch: id => get(`/canvases/${id}`),
+  update: (id, params) => put(`/canvases/${id}`),
+  destroy: id => destroy(`/canvases/${id}`),
+};
+
 export const User = {
   fetch: () => get(`/users/current_user`),
-}
+};
