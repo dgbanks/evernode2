@@ -1,6 +1,7 @@
 import { canvasActions, currentUserActions } from "constants/action_types";
 
 export default (prevState = {}, { type, canvas, user }) => {
+  debugger
   Object.freeze(prevState);
   switch (type) {
     case currentUserActions.CURRENT_USER_SUCCESS:
@@ -8,7 +9,9 @@ export default (prevState = {}, { type, canvas, user }) => {
     case canvasActions.CANVAS_CREATE_REQUEST:
       return Object.assign({}, prevState, { creating: true });
     case canvasActions.CANVAS_CREATE_SUCCESS:
-      return Object.assign({}, prevState, { creating: false });
+      const canvases = prevState.data;
+      canvases.push(canvas);
+      return { data: canvases };
     case canvasActions.CANVAS_CREATE_FAILURE:
       return prevState;
     default:

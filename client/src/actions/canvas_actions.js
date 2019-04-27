@@ -15,7 +15,7 @@ export const createCanvas = canvas => dispatch => {
   dispatch(createRequest());
   Canvases.create(canvas)
     .then(res => {
-      dispatch(createSuccess(res.data.canvas));
+      dispatch(createSuccess(res.data));
       dispatch({ type: uiActions.TOGGLE_FORM });
     })
     .catch(res => dispatch(createFailure()))
