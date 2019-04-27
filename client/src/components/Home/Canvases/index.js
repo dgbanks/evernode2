@@ -28,9 +28,7 @@ const Header = ({ toggle }) => (
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(({ toggle, canvases }) => {
-  // debugger
-  return (
+)(({ toggle, canvases }) => (
   <List
   header={<Header toggle={toggle} />}
   dataSource={canvases}
@@ -44,4 +42,4 @@ export default connect(
     </List.Item>
   )}
   />
-)});
+));

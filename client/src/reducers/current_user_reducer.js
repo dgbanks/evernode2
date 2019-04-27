@@ -8,7 +8,7 @@ export default (prevState = state, { user, type }) => {
     case currentUserActions.CURRENT_USER_REQUEST:
       return Object.assign({}, prevState, { fetching: true });
     case currentUserActions.CURRENT_USER_SUCCESS:
-      return { data: user, fetching: false };
+      return { data: user.data, fetching: false };
     case currentUserActions.CURRENT_USER_FAILURE:
       return prevState;
     case authenticationActions.LOGOUT:
