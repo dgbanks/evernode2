@@ -10,3 +10,5 @@ export const currentUserActions = {
   CURRENT_USER_SUCCESS: "CURRENT_USER_SUCCESS",
   CURRENT_USER_FAILURE: "CURRENT_USER_FAILURE",
 };
+
+export const uiActions = { TOGGLE_FORM: "TOGGLE_FORM" };

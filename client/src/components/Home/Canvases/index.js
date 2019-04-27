@@ -2,7 +2,7 @@ import React from "react";
 import { List as AntList, Typography, Button } from "antd";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
-import openCanvasForm from "./CanvasForm"
+import CanvasForm from "./CanvasForm"
 
 const List = styled(AntList)`
   background: white;
@@ -12,16 +12,17 @@ const List = styled(AntList)`
   align-self: flex-start;
 `;
 
-const Header = () => (
+const Header = ({ open, toggle }) => (
   <>
     <Typography.Title level={4}>Your Canvases</Typography.Title>
-    <Button type="primary" onClick={openCanvasForm}>New</Button>
+    <Button type="primary" onClick={toggle}>New</Button>
+    <CanvasForm open={open} toggle={toggle} />
   </>
 );
 
-export default ({ data }) => (
+export default ({ data, formProps }) => (
   <List
-  header={<Header />}
+  header={<Header {...formProps} />}
   dataSource={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
   pagination={{ total: 10, pageSize: 5 }}
   renderItem={n => (

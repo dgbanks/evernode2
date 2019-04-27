@@ -4,6 +4,7 @@ import { withRouter } from "react-router-dom";
 import { Layout, Spin, Icon } from "antd";
 import styled from "styled-components";
 import { logout } from "actions/authentication_actions";
+import { toggleForm } from "actions/uiActions";
 import { fetchCurrentUser } from "actions/current_user_actions";
 import Header from "./Header";
 import Canvases from "./Canvases";
@@ -24,7 +25,7 @@ class Home extends React.Component {
   }
 
   render() {
-    const { currentUser, logout } = this.props;
+    const { currentUser, logout, formOpen, toggleForm } = this.props;
 
     if (currentUser.fetching || !currentUser.data) {
       return (
@@ -38,7 +39,10 @@ class Home extends React.Component {
       <Layout style={{ height: "100vh" }}>
       <Header logout={logout} currentUser={currentUser.data} />
       <Body>
-        <Canvases data={currentUser.data.canvases} />
+        <Canvases
+          data={currentUser.data.canvases}
+          formProps={{ open: formOpen, toggle: toggleForm }}
+        />
       </Body>
       <Layout.Footer>
       </Layout.Footer>
@@ -49,11 +53,13 @@ class Home extends React.Component {
 
 const mapStateToProps = state => ({
   isAuthenticated: state.authentication.isAuthenticated,
-  currentUser: state.currentUser
+  currentUser: state.currentUser,
+  formOpen: state.ui.formOpen
 });
 const mapDispatchToProps = dispatch => ({
   logout: () => dispatch(logout()),
-  fetchCurrentUser: () => dispatch(fetchCurrentUser())
+  fetchCurrentUser: () => dispatch(fetchCurrentUser()),
+  toggleForm: () => dispatch(toggleForm())
 });
 
 export default withRouter(connect(
