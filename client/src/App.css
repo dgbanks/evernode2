@@ -6,3 +6,9 @@
 .ant-modal-title {
   color: unset;
 }
+
+.ant-list-item-action {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

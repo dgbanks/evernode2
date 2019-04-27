@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { List as AntList, Typography, Button, Icon } from "antd";
+import { List as AntList, Typography, Button, Icon, Tooltip } from "antd";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { toggleForm } from "actions/ui_actions";
@@ -28,15 +28,13 @@ const Header = ({ toggle }) => (
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(({ toggle, canvases }) => {
-  debugger
-  return (
+)(({ toggle, canvases }) => (
   <List
   header={<Header toggle={toggle} />}
   dataSource={canvases}
   pagination={{ pageSize: 5 }}
-  renderItem={({id, title}) => (
-    <List.Item actions={[<Icon type="edit" />, <Icon type="usergroup-add" />]}>
+  renderItem={({ id, title }) => (
+    <List.Item actions={[<Icon type="edit" />]}>
       <List.Item.Meta
         title={<NavLink to={`/${id}`}>{title}</NavLink>}
         description="some more text"
@@ -44,4 +42,4 @@ export default connect(
     </List.Item>
   )}
   />
-)});
+));

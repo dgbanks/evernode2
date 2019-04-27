@@ -1,7 +1,6 @@
 import { canvasActions, currentUserActions } from "constants/action_types";
 
 export default (prevState = {}, { type, canvas, user }) => {
-  debugger
   Object.freeze(prevState);
   switch (type) {
     case currentUserActions.CURRENT_USER_SUCCESS:
