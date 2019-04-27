@@ -1,8 +1,13 @@
 import React from "react";
+import { connect } from "react-redux";
 import { List as AntList, Typography, Button } from "antd";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
+import { toggleForm } from "actions/ui_actions";
 import CanvasForm from "./CanvasForm"
+
+const mapStateToProps = state => ({});
+const mapDispatchToProps = dispatch => ({ toggle: () => dispatch(toggleForm()) });
 
 const List = styled(AntList)`
   background: white;
@@ -12,17 +17,20 @@ const List = styled(AntList)`
   align-self: flex-start;
 `;
 
-const Header = ({ open, toggle }) => (
+const Header = ({ toggle }) => (
   <>
     <Typography.Title level={4}>Your Canvases</Typography.Title>
-    <Button type="primary" onClick={toggle}>New</Button>
-    <CanvasForm open={open} toggle={toggle} />
+    <Button type="primary" onClick={toggle}>New Canvas</Button>
+    <CanvasForm />
   </>
 );
 
-export default ({ data, formProps }) => (
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(({ toggle }) => (
   <List
-  header={<Header {...formProps} />}
+  header={<Header toggle={toggle} />}
   dataSource={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
   pagination={{ total: 10, pageSize: 5 }}
   renderItem={n => (
@@ -34,4 +42,4 @@ export default ({ data, formProps }) => (
     </List.Item>
   )}
   />
-);
+));

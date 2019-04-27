@@ -11,9 +11,9 @@ const createRequest = () => ({ type: CANVAS_CREATE_REQUEST });
 const createSuccess = canvas => ({ type: CANVAS_CREATE_SUCCESS, canvas });
 const createFailure = () => ({ type: CANVAS_CREATE_FAILURE });
 
-export const createCanvas = () => dispatch => {
+export const createCanvas = canvas => dispatch => {
   dispatch(createRequest());
-  Canvases.create()
+  Canvases.create(canvas)
     .then(res => dispatch(createSuccess(res.data.canvas)))
     .catch(res => dispatch(createFailure()))
 };

@@ -1,7 +1,11 @@
 import React from "react";
+import { connect } from "react-redux";
 import { Form, Modal, Input } from "antd";
+import { toggleForm } from "actions/ui_actions";
+import { createCanvas } from "actions/canvas_actions";
 
-export default Form.create()(({ form, open, toggle }) => {
+const CanvasForm = Form.create()(({ form, open, toggle, createCanvas }) => {
+  // debugger
   return (
     <Modal
     title="New Canvas"
@@ -23,3 +27,16 @@ export default Form.create()(({ form, open, toggle }) => {
     </Modal>
   )
 });
+
+const mapStateToProps = state => ({
+  open: state.ui.formOpen
+});
+
+const mapDispatchToProps = dispatch => ({
+  toggle: () => dispatch(toggleForm()),
+  createCanvas: canvas => dispatch(createCanvas(canvas))
+});
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CanvasForm);

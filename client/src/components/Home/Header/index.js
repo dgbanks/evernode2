@@ -1,6 +1,8 @@
 import React from "react";
+import { connect } from "react-redux";
 import { Layout, Dropdown, Menu, Typography, Icon } from "antd";
 import styled from "styled-components";
+import { logout } from "actions/authentication_actions";
 
 const Header = styled(Layout.Header)`
   display: flex;
@@ -23,7 +25,13 @@ const Arrow = styled(Icon)`
   color: white;
 `;
 
-export default ({ logout, currentUser }) => (
+const mapStateToProps = state => ({ currentUser: state.currentUser.data });
+const mapDispatchToProps = dispatch => ({ logout: () => dispatch(logout()) });
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(({ logout, currentUser }) => (
   <Header>
     <Title>evernode</Title>
     <Title>
@@ -37,4 +45,4 @@ export default ({ logout, currentUser }) => (
       </Dropdown>
     </Title>
   </Header>
-);
+));
