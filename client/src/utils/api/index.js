@@ -10,9 +10,9 @@ export const Authentication = {
 };
 
 export const Canvases = {
-  create: params => post("/canvases"),
+  create: params => post("/canvases", params),
   fetch: id => get(`/canvases/${id}`),
-  update: (id, params) => put(`/canvases/${id}`),
+  update: (id, params) => put(`/canvases/${id}`, params),
   destroy: id => destroy(`/canvases/${id}`),
 };
 
